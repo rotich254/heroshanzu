@@ -41,7 +41,7 @@
   <!-- ======= Top Bar ======= -->
   <!-- <div id="topbar" class="d-flex align-items-center fixed-top">
     <div class="container d-flex align-items-center justify-content-center justify-content-md-between">
-      <div class="align-items-center d-none d-md-flex">
+      <div class="align-items-center d-none d-md-flex">S
         <i class="bi bi-clock"></i> Monday - Saturday, 8AM to 10PM
       </div>
       <div class="d-flex align-items-center">
@@ -107,9 +107,10 @@
       <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
 
       <div class="carousel-inner" role="listbox">
+        
 
         <!-- Slide 1 -->
-        <div class="carousel-item active" style="background-image: url(assets/img/media/image42.JPG)">
+        <div class="carousel-item active" style="background-image: url(assets/img/image42.JPG)">
           <div class="container" style="background-color:rgba(255, 255, 255, 0.449)">
             <h2>Welcome to <span>Hero Shanzu Primary & Junior Secondary School</span></h2>
             <h3>Education Is The Key to Success</h3>
@@ -121,7 +122,7 @@
         </div>
 
         <!-- Slide 2 -->
-        <div class="carousel-item" style="background-image: url(assets/img/media/image6.JPG)">
+        <div class="carousel-item" style="background-image: url(assets/img/image6.JPG)">
           <div class="container" style="background-color:rgba(255, 255, 255, 0.449)">
             <h2>Welcome to <span>Hero Shanzu Primary & Junior Secondary School</span></h2>
             <h3>Education Is The Key to Success</h3>
@@ -132,7 +133,7 @@
         </div>
 
         <!-- Slide 3 -->
-        <div class="carousel-item" style="background-image: url(assets/img/media/image60.JPG)">
+        <div class="carousel-item" style="background-image: url(assets/img/image60.JPG)">
           <div class="container" style="background-color:rgba(255, 255, 255, 0.449)">
             <h2>Welcome to <span>Hero Shanzu Primary & Junior Secondary School</span></h2>
             <h3>Education Is The Key to Success</h3>
@@ -154,6 +155,7 @@
 
     </div>
   </section><!-- End Hero -->
+
 
   <main id="main">
 
@@ -525,7 +527,7 @@
 
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/media/image22.JPG"  alt="" class="img-fluid">
+                <img id="image1"  alt="" class="img-fluid">
               </div>
             </div>
           </div>
@@ -547,7 +549,7 @@
 
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/media/image7.JPG" alt="" class="img-fluid">
+                <img id="image7"  alt="" class="img-fluid">
               </div>
             </div>
           </div>
@@ -569,7 +571,7 @@
 
               </div>
               <div class="col-lg-6 order-1 order-lg-2 text-center">
-                <img src="assets/img/media/image40.JPG" class="img-fluid" alt="">
+                <img id="image40" src="" class="img-fluid" alt="">
               </div>
             </div>
           </div>
@@ -1094,6 +1096,52 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+  
+  <script type="module">
+    
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-analytics.js";
+    import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyAmEcTl9sGODviB4XarYiDbbGo5OjIKT_I",
+      authDomain: "heroshanzu-f4980.firebaseapp.com",
+      projectId: "heroshanzu-f4980",
+      storageBucket: "heroshanzu-f4980.appspot.com",
+      messagingSenderId: "904440627680",
+      appId: "1:904440627680:web:1a8335946773c16f64eb85",
+      measurementId: "G-6K8160LHED"
+    };
+
+    
+    const app = initializeApp(firebaseConfig);
+    const analytics = getAnalytics(app);
+    const storage = getStorage(app);
+
+    
+    function displayImage(imgElementId, imgPath) {
+      const imgRef = ref(storage, imgPath); 
+      getDownloadURL(imgRef)
+        .then((url) => {
+          const img = document.getElementById(imgElementId);
+          img.src = url;
+        })
+        .catch((error) => {
+          console.error("Error fetching image:", error);
+        });
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {      
+      displayImage('image1', 'gs://heroshanzu-f4980.appspot.com/director.JPG'); 
+      displayImage('image7', 'gs://heroshanzu-f4980.appspot.com/image7.JPG'); 
+      displayImage('image40', 'gs://heroshanzu-f4980.appspot.com/image40.JPG'); 
+    });
+  </script>
+
+
 
 </body>
 
